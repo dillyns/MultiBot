@@ -89,7 +89,7 @@ MultiBot:SetScript("OnEvent", function()
 		tX, tY = MultiBot.toPoint(MultiBot.stats)
 		MultiBotSave["StatsPoint"] = tX .. ", " .. tY
 
-		tX, tY = MultiBot.toPoint(MultiBot.reward)
+		tX, tY = MultiBot.toPoint(MultiBot.Reward.UI)
 		MultiBotSave["RewardPoint"] = tX .. ", " .. tY
 
 		tX, tY = MultiBot.toPoint(MultiBot.talent)
@@ -112,7 +112,7 @@ MultiBot:SetScript("OnEvent", function()
 
 		MultiBotSave["AutoRelease"] = MultiBot.IF(MultiBot.auto.release, "true", "false")
 		MultiBotSave["NecroNet"] = MultiBot.IF(MultiBot.necronet.state, "true", "false")
-		MultiBotSave["Reward"] = MultiBot.IF(MultiBot.reward.state, "true", "false")
+		MultiBotSave["Reward"] = MultiBot.IF(MultiBot.Reward.state, "true", "false")
 
 		MultiBotSave["Masters"] = MultiBot.IF(MultiBot.frames["MultiBar"].frames["Main"].buttons["Masters"].state, "true", "false")
 		MultiBotSave["Creator"] = MultiBot.IF(MultiBot.frames["MultiBar"].frames["Main"].buttons["Creator"].state, "true", "false")
@@ -193,7 +193,7 @@ MultiBot:SetScript("OnEvent", function()
 
 		if(MultiBotSave["RewardPoint"] ~= nil) then
 			local tPoint = MultiBot.doSplit(MultiBotSave["RewardPoint"], ", ")
-			MultiBot.reward.setPoint(tonumber(tPoint[1]), tonumber(tPoint[2]))
+			MultiBot.Reward.UI.setPoint(tonumber(tPoint[1]), tonumber(tPoint[2]))
 		end
 
 		if(MultiBotSave["TalentPoint"] ~= nil) then
@@ -1463,8 +1463,8 @@ MultiBot:SetScript("OnEvent", function()
 	-- QUEST:COMPLETE --
 
 	if(event == "QUEST_COMPLETE") then
-		if(MultiBot.reward.state) then
-			MultiBot.setRewards()
+		if(MultiBot.Reward.state) then
+			MultiBot.Reward.openRewards()
 			return
 		end
 
